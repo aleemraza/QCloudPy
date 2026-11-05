@@ -1,0 +1,270 @@
+QCloudRL/
+│
+├── config/
+│   ├── settings.yaml
+│   └── backend_config.yaml
+│
+├── dataset/
+│   └── mqt_bench/
+│       └── openqasm3/
+│
+├── src/
+│   └── qcloudrl/
+│       │
+│       ├── circuits/
+│       │   ├── __init__.py
+│       │   ├── circuit_registry.py
+│       │   ├── circuit_loader.py
+│       │   ├── circuit_profiler.py
+│       │   └── circuit_cache.py
+│       │
+│       ├── tasks/
+│       │   ├── __init__.py
+│       │   └── qtask.py
+│       │
+│       ├── nodes/
+│       │   ├── __init__.py
+│       │   ├── qnode.py
+│       │   ├── fake_backend.py
+│       │   └── backend_manager.py
+│       │
+│       ├── broker/
+│       │   ├── __init__.py
+│       │   ├── broker.py
+│       │   └── scheduler.py
+│       │
+│       ├── simulation/
+│       │   ├── __init__.py
+│       │   └── simulator.py
+│       │
+│       ├── environment/
+│       │   ├── __init__.py
+│       │   ├── qcloud_env.py
+│       │   ├── env_creator.py
+│       │   └── env_wrapper.py
+│       │
+│       ├── metrics/
+│       │   ├── __init__.py
+│       │   └── metrics.py
+│       │
+│       └── utils/
+│           ├── __init__.py
+│           └── logger.py
+│
+├── experiments/
+│   ├── run_random.py
+│   ├── run_greedy.py
+│   └── run_rl.py
+│
+├── tests/
+│   ├── test_circuit_loader.py
+│   ├── test_qtask.py
+│   ├── test_qnode.py
+│   ├── test_broker.py
+│   └── test_environment.py
+│
+├── requirements.txt
+└── README.md
+
+
+pytest -q tests/test_qtask.py
+
+
+QCloudRL/
+│
+├── qcloudrl/
+│   │
+│   ├── circuits/
+│   │   ├── __init__.py
+│   │   ├── models.py
+│   │   ├── registry.py
+│   │   ├── loader.py
+│   │   ├── feature_extractor.py
+│   │   ├── profiler.py
+│   │   ├── cache.py
+│   │   └── service.py
+│   │
+│   ├── QTask/
+│   │   ├── __init__.py
+│   │   ├── QTask.py
+│   │   ├── task_factory.py
+│   │ 
+│   │
+│   ├── QNode/
+│   │   ├── __init__.py
+│   │   ├── qnode.py
+│   │   ├── models.py
+│   │   ├── backend_factory.py
+│   │   ├── capability_manager.py
+│   │   └── executor.py
+│   │
+│   ├── Broker/
+│   │   ├── __init__.py
+│   │   ├── broker.py
+│   │   ├── constraints.py
+│   │   ├── scheduling.py
+│   │   └── execution_manager.py
+│   │
+│   ├── simulation/
+│   │   ├── __init__.py
+│   │   ├── simpy_engine.py
+│   │   ├── execution_estimator.py
+│   │   ├── queue_monitor.py
+│   │   └── metrics_collector.py
+│   │
+│   ├── schedulers/
+│   │   ├── __init__.py
+│   │   ├── base_scheduler.py
+│   │   ├── random_scheduler.py
+│   │   ├── fifo_scheduler.py
+│   │   ├── priority_scheduler.py
+│   │   ├── greedy_scheduler.py
+│   │   └── rl_scheduler.py
+│   │
+│   ├── gym_env/
+│   │   ├── __init__.py
+│   │   ├── config.py
+│   │   ├── environment.py
+│   │   └── wrappers.py
+│   │
+│   ├── evaluation/
+│   │   ├── __init__.py
+│   │   ├── evaluator.py
+│   │   ├── metrics.py
+│   │   └── comparison.py
+│   │
+│   └── utils/
+│       ├── __init__.py
+│       └── logger.py
+│
+├── tests/
+│   ├── test_circuit_loader.py
+│   ├── test_qtask.py
+│   ├── test_qnode.py
+│   ├── test_broker.py
+│   └── test_environment.py
+│
+├── dataset/
+│   └── mqt_bench/
+│
+├── data/
+│   └── circuit_manifest.json
+│
+├── configs/
+│   ├── simulation.yaml
+│   ├── backends.yaml
+│   └── experiments.yaml
+│
+├── examples/
+│   ├── create_circuits.py
+│   ├── create_qtasks.py
+│   ├── create_qnodes.py
+│   ├── run_simulation.py
+│   └── compare_schedulers.py
+│
+├── results/
+├── logs/
+├── requirements.txt
+├── pyproject.toml
+├── README.md
+└── .gitignore
+
+
+2. Complete workflow
+We will implement this lifecycle:
+1. Gymnasium initializes the simulation: creates a SimPy environment and Broker.
+2. Broker registers QNodes: each QNode represents a quantum computing resource with its own capacity and backend characteristics.
+3. QTasks enter the Broker: tasks are submitted to the pending queue.
+4. Gymnasium receives an observation: the observation describes pending tasks and available QNode resources.
+5. Scheduler selects an action: later, your RL scheduler will select which task should execute on which QNode.
+6. Broker validates the assignment: checks qubit capacity, node availability rules, and task compatibility.
+7. Broker dispatches the QTask: the corresponding SimPy process requests the QNode resource.
+8. SimPy advances simulation time: tasks wait for resources and execute for their configured simulated duration.
+9. QNode completes the task: its state and execution information are updated.
+10. Broker returns execution information: Gymnasium receives the updated task and resource states.
+11. Gymnasium calculates reward: the scheduler receives feedback and selects its next action.
+
+
+Excellent. Then we will design QCloudRL as a complete scheduling and resource-management framework for heterogeneous quantum clouds.
+
+Your research objective is not simply to select the best QNode for a task. It is to determine:
+Given a set of pending quantum tasks and a heterogeneous collection of QNodes, which task should be executed, on which QNode, and in what order to optimize overall cloud performance?
+
+This means the scheduler controls the complete scheduling decision:
+1. Select a QTask from the ready-task queue.
+2. Identify QNodes compatible with that task.
+3. Evaluate the resource characteristics of those QNodes.
+4. Select the most appropriate QNode.
+5. Submit the task-node assignment to the Broker.
+6. Let SimPy manage resource requests, waiting, and execution.
+7. Observe the updated system state and make the next decision.
+1. Final scheduling architecture
+Pending QTask Queue
+
+Task ID · Arrival · Priority · Qubits · Shots
+
+Scheduling Engine
+
+Select task + select QNode
+
+Task Selection
+
+FIFO / Priority / RL
+
+
+Resource Selection
+
+Greedy / Best Fit / RL
+
+
+
+Broker
+
+Validate compatibility · Assign · Dispatch
+
+SimPy + Heterogeneous QNodes
+
+Queueing · Execution · Completion
+
+Updated State + Reward
+
+Feedback to scheduler / RL agent
+
+Next scheduling decision
+
+An important distinction: task selection and resource selection are two parts of one scheduling decision. We should not implement them as unrelated algorithms that can produce incompatible decisions.
+2. How we will represent a scheduling action
+For example, suppose the cloud has four QNodes and three ready tasks:
+
+Ready tasks
+Task	Required qubits	Shots
+QT001	5	1024
+QT002	20	2048
+QT003	15	1024
+
+Quantum resources
+QNode	Backend	Qubit capacity
+node_0	Washington	127
+node_1	Kolkata	27
+node_2	Hanoi	27
+node_3	Guadalupe	16
+
+The scheduler should select a task-node pair.
+
+For example:
+- QT001 → node_3
+- QT002 → node_1
+- QT003 → node_2
+The scheduler must never select an incompatible task-node pair.
+
+For RL, we can encode a scheduling action as:
+\[
+a = task\_index \times N_{nodes}+node\_index
+\]
+
+With 25 task slots and four QNodes:
+\[
+|\mathcal{A}|=25\times4=100
+\]
+
+We will use action masking so the RL agent cannot select unavailable, incompatible, or not-yet-arrived task-node combinations.

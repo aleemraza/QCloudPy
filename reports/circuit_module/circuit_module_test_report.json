@@ -1,0 +1,164 @@
+{
+    "project": "QCloudRL",
+    "module": "Circuit Module",
+    "dataset": "MQT Bench",
+    "timestamp": "2026-11-05T04:24:46.481813+00:00",
+    "configuration": {
+        "cache_capacity": 32,
+        "max_sample_circuits": 1,
+        "backend_execution": false,
+        "quantum_job_submission": false
+    },
+    "components": {
+        "Models": {
+            "status": "PASS",
+            "details": {
+                "format_models": "PASS",
+                "record_model": "PASS",
+                "features_model": "PASS",
+                "profile_model": "PASS",
+                "validation": "PASS"
+            }
+        },
+        "Registry": {
+            "status": "PASS",
+            "details": {
+                "indexed_circuits": 632,
+                "format_counts": {
+                    "qasm3": 632
+                },
+                "manifest": "C:\\Users\\Aleem Raza\\Desktop\\ML&AI-ENG\\QAISim\\data\\QCloudSimpy_NewCode\\dataset\\mqt_bench\\circuit_manifest.json"
+            }
+        },
+        "Loader": {
+            "status": "PASS",
+            "details": {
+                "circuits_loaded": 1,
+                "sample_circuits": [
+                    {
+                        "circuit_id": "qc_45414c989bfe5b17",
+                        "name": "ae_indep_opt2_10",
+                        "num_qubits": 10,
+                        "num_clbits": 10
+                    }
+                ]
+            }
+        },
+        "FeatureExtractor": {
+            "status": "PASS",
+            "details": {
+                "circuits_analyzed": 1,
+                "features": [
+                    {
+                        "circuit_id": "qc_45414c989bfe5b17",
+                        "num_qubits": 10,
+                        "depth": 12,
+                        "gate_count": 20,
+                        "gate_histogram": {
+                            "_ccircuit_167__1": 1,
+                            "_ccircuit_167__128": 1,
+                            "_ccircuit_167__16": 1,
+                            "_ccircuit_167__2": 1,
+                            "_ccircuit_167__256": 1,
+                            "_ccircuit_167__32": 1,
+                            "_ccircuit_167__4": 1,
+                            "_ccircuit_167__64": 1,
+                            "_ccircuit_167__8": 1,
+                            "h": 9,
+                            "qft_dg": 1,
+                            "ry": 1
+                        }
+                    }
+                ],
+                "transpilation_performed": false
+            }
+        },
+        "CircuitCache": {
+            "status": "PASS",
+            "details": {
+                "same_object_reused": true,
+                "hits_before": 1,
+                "hits_after": 3,
+                "misses_before": 1,
+                "misses_after": 1,
+                "capacity": 32,
+                "current_size": 1,
+                "evictions": 0
+            }
+        },
+        "CircuitService": {
+            "status": "PASS",
+            "details": {
+                "statistics": {
+                    "dataset": {
+                        "name": "mqt_bench",
+                        "directory": "C:\\Users\\Aleem Raza\\Desktop\\ML&AI-ENG\\QAISim\\data\\QCloudSimpy_NewCode\\dataset\\mqt_bench",
+                        "manifest": "C:\\Users\\Aleem Raza\\Desktop\\ML&AI-ENG\\QAISim\\data\\QCloudSimpy_NewCode\\dataset\\mqt_bench\\circuit_manifest.json",
+                        "indexed_circuits": 632
+                    },
+                    "cache": {
+                        "capacity": 32,
+                        "size": 1,
+                        "hits": 3,
+                        "misses": 1,
+                        "evictions": 0,
+                        "total_requests": 4,
+                        "hit_rate": 0.75
+                    },
+                    "loader": {},
+                    "profiler": {}
+                },
+                "service_initialized": true
+            }
+        },
+        "Profiler": {
+            "status": "PASS",
+            "details": {
+                "backend_name": "generic_backend_3q",
+                "optimization_level": 1,
+                "original_depth": 3,
+                "original_gate_count": 2,
+                "transpiled_depth": 5,
+                "transpiled_gate_count": 4,
+                "basis_gates": [
+                    "cx",
+                    "id",
+                    "rz",
+                    "sx",
+                    "x"
+                ],
+                "is_compatible": true,
+                "compatibility_notes": [
+                    "Transpilation succeeded for this backend.",
+                    "This does not guarantee job submission or runtime execution support."
+                ],
+                "profiled_at": "2026-11-05T04:24:49.711430+00:00",
+                "profiler_metadata": {
+                    "profiler": "CircuitProfiler",
+                    "profiler_version": 1,
+                    "seed_transpiler": 42,
+                    "basis_gates_source": "backend_target",
+                    "transpiled_gate_histogram": {
+                        "cx": 1,
+                        "rz": 2,
+                        "sx": 1
+                    },
+                    "original_num_qubits": 2,
+                    "transpiled_num_qubits": 3,
+                    "complexity_score_formula": "(original_num_qubits * original_depth) + original_gate_count",
+                    "complexity_score_is_heuristic": true
+                },
+                "quantum_execution": false
+            }
+        }
+    },
+    "details": {},
+    "errors": [],
+    "summary": {
+        "overall_status": "PASS",
+        "total_components": 7,
+        "passed": 7,
+        "failed": 0,
+        "not_tested": 0
+    }
+}

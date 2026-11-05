@@ -1,0 +1,29 @@
+py -c "from qcloudrl.circuits.registry import CircuitRegistry; r=CircuitRegistry('dataset/mqt_bench'); x=r.index_dataset(); print('Indexed:',len(x)); print('QASM2:',len(r.get_by_format(__import__('qcloudrl.circuits.models',fromlist=['CircuitFormat']).CircuitFormat.QASM2))); print('QASM3:',len(r.get_by_format(__import__('qcloudrl.circuits.models',fromlist=['CircuitFormat']).CircuitFormat.QASM3)))"
+py -c "from qcloudrl.circuits.registry import CircuitRegistry; r=CircuitRegistry('dataset/mqt_bench'); r.index_dataset(); print(r.save_manifest())"
+
+├── gym_env/
+│   ├── __init__.py
+│   ├── config.py
+│   ├── environment.py
+│   ├── env_creator.py
+│   └── wrappers.py
+│
+├── schedulers/
+│   ├── __init__.py
+│   ├── base_scheduler.py
+│   ├── random_scheduler.py
+│   ├── fifo_scheduler.py
+│   ├── priority_scheduler.py
+│   ├── greedy_scheduler.py
+│   └── best_fit_scheduler.py
+│
+├── rl/
+│   ├── __init__.py
+│   ├── dqn/
+│   └── ppo/
+│
+├── evaluation/
+│   ├── __init__.py
+│   ├── metrics.py
+│   ├── experiment.py
+│   └── reporting.py
