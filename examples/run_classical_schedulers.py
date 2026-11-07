@@ -552,7 +552,7 @@ def create_qnodes():
 def task_source():
 
     return task_factory.create_tasks(
-        records=records[:100],
+        records=records[:500],
         shots=1024,
         priority=0,
         arrival_interval=0.5,
@@ -566,9 +566,9 @@ def task_source():
 
 config = GymEnvConfig(
     n_qnodes=4,
-    max_tasks=100,
+    max_tasks=500,
     default_execution_time=2.0,
-    max_episode_steps=100,
+    max_episode_steps=500,
     reward_mode="inverse_time",
 )
 

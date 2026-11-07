@@ -13,31 +13,66 @@ class Assignment:
     status: str = "assigned"
 
 
+# @dataclass
+# class BrokerStats:
+#     """Tracks overall Broker performance."""
+
+#     submitted: int = 0
+#     assigned: int = 0
+#     completed: int = 0
+#     failed: int = 0
+#     rejected: int = 0
+
+#     def to_dict(self) -> dict:
+#         return {
+#             "submitted": self.submitted,
+#             "assigned": self.assigned,
+#             "completed": self.completed,
+#             "failed": self.failed,
+#             "rejected": self.rejected,
+#         }
+
+#     def reset(self) -> None:
+#         self.submitted = 0
+#         self.assigned = 0
+#         self.completed = 0
+#         self.failed = 0
+#         self.rejected = 0
+
 @dataclass
 class BrokerStats:
-    """Tracks overall Broker performance."""
+    """Tracks task admission, assignment, and execution statistics."""
 
     submitted: int = 0
+    accepted: int = 0
+    rejected: int = 0
+
     assigned: int = 0
+
     completed: int = 0
     failed: int = 0
-    rejected: int = 0
+
+    assignment_errors: int = 0
 
     def to_dict(self) -> dict:
         return {
             "submitted": self.submitted,
+            "accepted": self.accepted,
+            "rejected": self.rejected,
             "assigned": self.assigned,
             "completed": self.completed,
             "failed": self.failed,
-            "rejected": self.rejected,
+            "assignment_errors": self.assignment_errors,
         }
 
     def reset(self) -> None:
         self.submitted = 0
+        self.accepted = 0
+        self.rejected = 0
         self.assigned = 0
         self.completed = 0
         self.failed = 0
-        self.rejected = 0
+        self.assignment_errors = 0
 
 
 @dataclass

@@ -51,6 +51,40 @@ class ConstraintManager:
             return False, ConstraintManager.INSUFFICIENT_QUBITS
 
         return True, None
+    
+    # @staticmethod
+    # def check(task, node, check_availability=True):
+    #     """
+    #     Check task and QNode compatibility.
+
+    #     Resolve unknown circuit requirements once and cache them
+    #     on the task to avoid repeated circuit loading.
+    #     """
+
+    #     # 1. Check node availability.
+    #     if check_availability and not node.is_available:
+    #         return False, ConstraintManager.NODE_UNAVAILABLE
+
+    #     # 2. Read cached qubit requirement.
+    #     required_qubits = task.required_qubits
+
+    #     # 3. Load the circuit only if the requirement is unknown.
+    #     if required_qubits is None:
+    #         try:
+    #             circuit = task.get_circuit()
+    #             required_qubits = int(circuit.num_qubits)
+
+    #             # Cache the resolved value on the task.
+    #             task.required_qubits = required_qubits
+
+    #         except Exception:
+    #             return False, ConstraintManager.CIRCUIT_UNAVAILABLE
+
+    #     # 4. Check QNode capacity.
+    #     if required_qubits > node.num_qubits:
+    #         return False, ConstraintManager.INSUFFICIENT_QUBITS
+
+    #     return True, None
 
     @staticmethod
     def validate(task, node, check_availability=True):

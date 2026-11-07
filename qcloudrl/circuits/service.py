@@ -95,21 +95,44 @@ class CircuitService:
     # Registry operations
     # ---------------------------------------------------------
 
+    # def index_dataset(
+    #     self,
+    #     limit: Optional[int] = None,
+    #     sample: Optional[int] = None,
+    #     save_manifest: bool = True,
+    # ) -> List[Any]:
+    #     """
+    #     Index circuit files in the dataset.
+
+    #     Only metadata is indexed. QASM files are not parsed here.
+    #     """
+
+    #     records = self.registry.index_dataset(
+    #         limit=limit,
+    #         sample=sample,
+    #     )
+
+    #     if save_manifest:
+    #         self.save_manifest()
+
+    #     return records
+    
     def index_dataset(
         self,
         limit: Optional[int] = None,
-        sample: Optional[int] = None,
+        seed: Optional[int] = None,
         save_manifest: bool = True,
     ) -> List[Any]:
         """
-        Index circuit files in the dataset.
+        Index circuit files and optionally save the JSON manifest.
 
-        Only metadata is indexed. QASM files are not parsed here.
+        Circuit files are indexed as metadata only.
+        They are not parsed into QuantumCircuit objects here.
         """
 
         records = self.registry.index_dataset(
             limit=limit,
-            sample=sample,
+            seed=seed,
         )
 
         if save_manifest:
